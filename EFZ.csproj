@@ -1,0 +1,45 @@
+﻿<Project Sdk="Godot.NET.Sdk/4.5.1">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net9.0</TargetFramework>
+		<EnableDynamicLoading>true</EnableDynamicLoading>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<StartAction>Program</StartAction>
+		<StartProgram>D:\Godot_v4.5.1-stable_mono_win64\Godot_v4.5.1-stable_mono_win64_console.exe</StartProgram>
+		<StartArguments>--path $(SolutionDir) --verbose</StartArguments>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Include="Audio\06.wav" />
+	  <Content Include="Audio\08.wav" />
+	  <Content Include="ResourcesHD\SYSTEM\TITLE.png" />
+	  <Content Include="ResourcesHD\SYSTEM\TITLE_OB.png" />
+	  <Content Include="Resources\SYSTEM\chr_sel_bg.png" />
+	  <Content Include="Resources\SYSTEM\chr_sel_ob.png" />
+	  <Content Include="Resources\SYSTEM\TITLE.png" />
+	  <Content Include="Resources\SYSTEM\TITLE_OB.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Autofac" Version="8.4.0" />
+	  <PackageReference Include="ReactiveUI" Version="22.2.1" />
+	  <PackageReference Include="ReactiveUI.SourceGenerators" Version="2.5.1">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	  <PackageReference Include="Serilog" Version="4.3.0" />
+	  <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
+	  <PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />
+	  <PackageReference Include="Serilog.Sinks.Godot" Version="1.0.0" />
+	  <PackageReference Include="Splat" Version="17.1.1" />
+	  <PackageReference Include="Splat.Autofac" Version="17.1.1" />
+	  <PackageReference Include="Splat.Serilog" Version="17.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="Shaders\transparent_shader.gdshader" />
+	</ItemGroup>
+</Project>
