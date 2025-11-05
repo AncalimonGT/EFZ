@@ -22,7 +22,7 @@ public class EXnanaseRes : CharactersResBase
         this.NameBoard = new AtlasTexture()
         {
             Atlas = @object,
-            Region = new Rect2(0, 256, 122 * Zoom, 32 * Zoom)
+            Region = new Rect2(0, 256+32*21, 122 * Zoom, 32 * Zoom)
         };
     }
 }

@@ -22,6 +22,16 @@ public partial class ChooseCharacter : NodeBase
     /// </summary>
     public TextureRect P1SelectBox { get; set; }
 
+    /// <summary>
+    /// P1姓名版
+    /// </summary>
+    public TextureRect P1NameBoard { get; set; }
+
+
+    /// <summary>
+    /// P1姓名版
+    /// </summary>
+    public TextureRect P1Name { get; set; }
 
     /// <summary>
     /// 人物列表
@@ -61,6 +71,27 @@ public partial class ChooseCharacter : NodeBase
             TextureFilter = CanvasItem.TextureFilterEnum.Nearest,
             Visible = false
         };
+
+        size = this.DataRes.ChooseCharacter.P1NameBoard.GetSize();
+        //创建一个1p姓名版
+        this.P1NameBoard = new TextureRect()
+        {
+            Texture = this.DataRes.ChooseCharacter.P1NameBoard,
+            Size = new Vector2(size.X * this.Zoom, size.Y * this.Zoom),
+            Material = this.Transparent,
+            TextureFilter = CanvasItem.TextureFilterEnum.Nearest,
+            Visible = false
+        };
+
+        //创建一个1p姓名版
+        this.P1Name = new TextureRect()
+        {
+            //Texture = this.DataRes.ChooseCharacter.P1NameBoard,
+            Size = new Vector2(122 * Zoom, 32 * Zoom),
+            Material = this.Transparent,
+            TextureFilter = CanvasItem.TextureFilterEnum.Nearest,
+            Visible = false
+        };
     }
 
 
@@ -68,7 +99,10 @@ public partial class ChooseCharacter : NodeBase
     public override void _Ready()
     {
         this.AddChild(this.Background);
-        //  this.AddChild(this.Camera);
+        this.P1NameBoard.Position = new Vector2(0, this.AppDataCore.WindowsSize.Y - 47 - this.P1NameBoard.Size.Y);
+        this.AddChild(this.P1NameBoard);
+        this.P1Name.Position = new Vector2(0, this.AppDataCore.WindowsSize.Y - 47 - 32 - this.P1Name.Size.Y);
+        this.AddChild(this.P1Name);
 
         //背景移动
         var targetPos = new Vector2(this.Background.Position.X, -this.Background.Size.Y / 2);
@@ -100,8 +134,6 @@ public partial class ChooseCharacter : NodeBase
 
             character.WhenAnyValue(t => t.IsSelected).Subscribe(@is =>
             {
-
-
                 if (@is)
                 {
                     //this.Characters.Where(t=>t.DisplayName != character.DisplayName).ForEach(t => t.IsSelected = false);
@@ -109,6 +141,10 @@ public partial class ChooseCharacter : NodeBase
                     this.Log().Info("选择了" + character.DisplayName);
                     this.P1SelectBox.Position = new Vector2(x - 9 * this.Zoom, y);
                     this.P1SelectBox.Visible = true;
+
+                    this.P1NameBoard.Visible = true;
+                    this.P1Name.Texture = character.Res.NameBoard;
+                    this.P1Name.Visible = true;
                 }
 
 
@@ -118,6 +154,7 @@ public partial class ChooseCharacter : NodeBase
         }
 
         this.AddChild(this.P1SelectBox);
+
 
 
         this.Characters.OrderBy(t => t.Row).ThenBy(t => t.Column).FirstOrDefault().IsSelected = true;

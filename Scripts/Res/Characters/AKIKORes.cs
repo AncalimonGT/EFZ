@@ -23,7 +23,7 @@ public class AKIKORes : CharactersResBase
         this.NameBoard = new AtlasTexture()
         {
             Atlas = @object,
-            Region = new Rect2(0, 256, 122 * Zoom, 32 * Zoom)
+            Region = new Rect2(0, 256 + 32 * 15, 122 * Zoom, 32 * Zoom)
         };
     }
 

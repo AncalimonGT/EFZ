@@ -32,6 +32,11 @@ public class ChooseCharacterRes : ResBase
     public AtlasTexture P1SelectBox { get; set; }
 
 
+    /// <summary>
+    /// P1名字板
+    /// </summary>
+    public AtlasTexture P1NameBoard { get; set; }
+
 
     public override void Load()
     {
@@ -52,6 +57,12 @@ public class ChooseCharacterRes : ResBase
         {
             Atlas = this.Object,
             Region = new Rect2(129, 0, 49 * this.Zoom, 24 * this.Zoom)
+        };
+
+        this.P1NameBoard = new AtlasTexture()
+        {
+            Atlas = this.Object,
+            Region = new Rect2(192, 9, 122 * this.Zoom, 95 * this.Zoom)
         };
     }
 }
