@@ -120,7 +120,7 @@ public partial class ChooseCharacter : NodeBase
         this.AddChild(this.P1SelectBox);
 
 
-        this.Characters.FirstOrDefault().IsSelected = true;
+        this.Characters.OrderBy(t => t.Row).ThenBy(t => t.Column).FirstOrDefault().IsSelected = true;
         //
     }
 
@@ -134,23 +134,64 @@ public partial class ChooseCharacter : NodeBase
 
     }
 
-    public override void _Input(InputEvent @event)
+    public void Selected(int x, int y)
     {
+        var ch = this.Characters.Where(t => t.IsSelected).FirstOrDefault();
 
-        if (@event.IsActionPressed("ui_right"))
+        var row = ch.Row + y;
+        var col = ch.Column + x;
+
+        if (row > 7)
         {
-            var c = this.Characters.Where(t => t.IsSelected).FirstOrDefault();
+            row = 0;
+        }
+        else if (row < 0)
+        {
+            row = 7;
+        }
 
-            c.IsSelected = false;
+        if (col > 2)
+        {
+            col = 0;
+        }
+        else if (col < 0)
+        {
+            col = 2;
+        }
 
-            var random = new Random();
-            var index = random.Next(0, this.Characters.Count);
-            this.Characters[index].IsSelected = true;
+        this.Log().Info($"1row:{row}.col:{col}");
+
+        ch.IsSelected = false;
+
+        ch = this.Characters.Where(t => t.Row == row && t.Column == col).FirstOrDefault();
+
+        if (ch != null)
+        {
+            this.Log().Info($"{ch.DisplayName}");
+            ch.IsSelected = true;
         }
     }
 
-    public override void _ExitTree()
+    public override void _Input(InputEvent @event)
     {
-        base._ExitTree();
+
+
+        if (@event.IsActionPressed("ui_right"))
+        {
+            this.Selected(1, 0);
+        }
+        else if (@event.IsActionPressed("ui_left"))
+        {
+            this.Selected(-1, 0);
+        }
+        else if (@event.IsActionPressed("ui_up"))
+        {
+            this.Selected(0, -1);
+        }
+        else if (@event.IsActionPressed("ui_down"))
+        {
+            this.Selected(0, 1);
+        }
+
     }
 }
