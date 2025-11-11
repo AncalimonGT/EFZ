@@ -20,6 +20,11 @@ public partial class ChooseCharacter : NodeBase
     /// <summary>
     /// p1选择框
     /// </summary>
+    public TextureRect P1SelectBar { get; set; }
+
+    /// <summary>
+    /// p1选择框
+    /// </summary>
     public TextureRect P1SelectBox { get; set; }
 
     /// <summary>
@@ -112,6 +117,15 @@ public partial class ChooseCharacter : NodeBase
             TextureFilter = CanvasItem.TextureFilterEnum.Nearest,
             Visible = false
         };
+         
+        this.P1SelectBar = new TextureRect()
+        {
+            Texture = this.DataRes.ChooseCharacter.P1SelectBar,
+            Size = new Vector2(18 * Zoom, 240 * Zoom),
+            Material = this.Transparent,
+            TextureFilter = CanvasItem.TextureFilterEnum.Nearest,
+            //Visible = false
+        };
 
         this.P1Illustration = new TextureRect()
         {
@@ -126,6 +140,7 @@ public partial class ChooseCharacter : NodeBase
     public override void _Ready()
     {
         this.AddChild(this.Background);
+        //this.AddChild(this.P1SelectBar);
         this.AddChild(this.P1Illustration);
 
         this.P1NameBoard.Position = new Vector2(0, this.AppDataCore.WindowsSize.Y - 47 - this.P1NameBoard.Size.Y);
