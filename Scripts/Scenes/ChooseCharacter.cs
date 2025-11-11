@@ -34,6 +34,11 @@ public partial class ChooseCharacter : NodeBase
     public TextureRect P1Name { get; set; }
 
     /// <summary>
+    /// P1立绘
+    /// </summary>
+    public TextureRect P1Illustration { get; set; }
+
+    /// <summary>
     /// 人物列表
     /// </summary>
     public List<CharacterBase> Characters { get; set; } = [];
@@ -41,9 +46,24 @@ public partial class ChooseCharacter : NodeBase
 
     public ShaderMaterial Transparent { get; set; }
 
+
+    public ShaderMaterial Transparent2 { get; set; }
+
     public ChooseCharacter()
     {
         this.Transparent = new ShaderMaterial() { Shader = GD.Load<Shader>("res:///Shaders/transparent_shader.gdshader") };
+        this.Transparent.SetShaderParameter("discard_rgb", new Vector3I(255, 0, 255));   // 要剔除的颜色 (R,G,B)
+        this.Transparent.SetShaderParameter("tolerance_rgb", new Vector3I(16, 8, 16));   // 分通道容差
+        this.Transparent.SetShaderParameter("use_alpha", false);
+
+
+        this.Transparent2 = new ShaderMaterial() { Shader = GD.Load<Shader>("res:///Shaders/transparent_shader.gdshader") };
+        this.Transparent2.SetShaderParameter("discard_rgb", new Vector3I(0, 120, 140));
+        this.Transparent2.SetShaderParameter("tolerance_rgb", new Vector3I(16, 8, 16));   // 可根据需要微调
+        this.Transparent2.SetShaderParameter("use_alpha", false);
+
+
+
 
         var size = this.DataRes.ChooseCharacter.Background.GetSize();
 
@@ -92,6 +112,13 @@ public partial class ChooseCharacter : NodeBase
             TextureFilter = CanvasItem.TextureFilterEnum.Nearest,
             Visible = false
         };
+
+        this.P1Illustration = new TextureRect()
+        {
+            Visible = false,
+            TextureFilter = CanvasItem.TextureFilterEnum.Nearest,
+            Material = this.Transparent2,
+        };
     }
 
 
@@ -99,6 +126,8 @@ public partial class ChooseCharacter : NodeBase
     public override void _Ready()
     {
         this.AddChild(this.Background);
+        this.AddChild(this.P1Illustration);
+
         this.P1NameBoard.Position = new Vector2(0, this.AppDataCore.WindowsSize.Y - 47 - this.P1NameBoard.Size.Y);
         this.AddChild(this.P1NameBoard);
         this.P1Name.Position = new Vector2(0, this.AppDataCore.WindowsSize.Y - 47 - 32 - this.P1Name.Size.Y);
@@ -136,8 +165,6 @@ public partial class ChooseCharacter : NodeBase
             {
                 if (@is)
                 {
-                    //this.Characters.Where(t=>t.DisplayName != character.DisplayName).ForEach(t => t.IsSelected = false);
-
                     this.Log().Info("选择了" + character.DisplayName);
                     this.P1SelectBox.Position = new Vector2(x - 9 * this.Zoom, y);
                     this.P1SelectBox.Visible = true;
@@ -145,6 +172,19 @@ public partial class ChooseCharacter : NodeBase
                     this.P1NameBoard.Visible = true;
                     this.P1Name.Texture = character.Res.NameBoard;
                     this.P1Name.Visible = true;
+
+                    var ill = character.Res.Illustration;
+                    if (ill != null)
+                    {
+                        var size = character.Res.Illustration.GetSize();
+                        this.Log().Info($"角色立绘{size}");
+
+                        this.P1Illustration.Texture = character.Res.Illustration;
+                        this.P1Illustration.FlipH = true;
+                        this.P1Illustration.Position = new Vector2(-Convert.ToInt32(this.AppDataCore.WindowsSize.X / 3.7), 0);
+                        this.P1Illustration.Size = new Vector2(size.X * this.Zoom, size.Y * this.Zoom);
+                        this.P1Illustration.Visible = true;
+                    }
                 }
 
 

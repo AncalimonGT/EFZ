@@ -17,6 +17,7 @@
 	  <Content Include="Audio\08.wav" />
 	  <Content Include="ResourcesHD\SYSTEM\TITLE.png" />
 	  <Content Include="ResourcesHD\SYSTEM\TITLE_OB.png" />
+	  <Content Include="Resources\SYSTEM\AKANE\AKANE.png" />
 	  <Content Include="Resources\SYSTEM\chr_sel_bg.png" />
 	  <Content Include="Resources\SYSTEM\chr_sel_ob.png" />
 	  <Content Include="Resources\SYSTEM\TITLE.png" />

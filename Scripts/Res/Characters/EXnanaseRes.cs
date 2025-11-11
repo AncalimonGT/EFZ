@@ -24,5 +24,7 @@ public class EXnanaseRes : CharactersResBase
             Atlas = @object,
             Region = new Rect2(0, 256+32*21, 122 * Zoom, 32 * Zoom)
         };
+
+        this.Illustration = ResBase.LoadRes<Texture2D>("SYSTEM/EXnanase/EXnanase.png");
     }
 }

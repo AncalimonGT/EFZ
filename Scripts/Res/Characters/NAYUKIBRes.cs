@@ -25,5 +25,7 @@ public class NAYUKIBRes : CharactersResBase
             Atlas = @object,
             Region = new Rect2(0, 256 + 32 *8, 122 * Zoom, 32 * Zoom)
         };
+
+        this.Illustration = ResBase.LoadRes<Texture2D>("SYSTEM/NAYUKIB/NAYUKIB.png");
     }
 }

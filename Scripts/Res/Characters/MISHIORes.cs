@@ -26,6 +26,8 @@ public class MISHIORes : CharactersResBase
             Atlas = @object,
             Region = new Rect2(0, 256 + 32 *14, 122 * Zoom, 32 * Zoom)
         };
+
+        this.Illustration = ResBase.LoadRes<Texture2D>("SYSTEM/MISHIO/MISHIO.png");
     }
 
 }

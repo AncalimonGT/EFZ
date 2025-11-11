@@ -21,14 +21,15 @@ public abstract class ResBase
 
     public abstract void Load();
 
-    protected string GetResUrl(string res)
+    public static string GetResUrl(string res)
     {
-        return $"res://Resources{(this.AppDataCore.IsHD ? "HD" : string.Empty)}/{res}";
+        var adc = Locator.Current.GetService<AppDataCore>();
+        return $"res://Resources{(adc.IsHD ? "HD" : string.Empty)}/{res}";
     }
 
-    protected T LoadRes<T>(string res) where T : class
+    public static T LoadRes<T>(string res) where T : class
     {
-        return GD.Load<T>(this.GetResUrl(res));
+        return GD.Load<T>(GetResUrl(res));
     }
 
 }

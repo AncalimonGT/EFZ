@@ -23,5 +23,7 @@ public class KANNARes : CharactersResBase
             Atlas = @object,
             Region = new Rect2(0, 256 + 32 * 19, 122 * Zoom, 32 * Zoom)
         };
+
+        this.Illustration = ResBase.LoadRes<Texture2D>("SYSTEM/KANNA/KANNA.png");
     }
 }

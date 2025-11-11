@@ -39,7 +39,7 @@ public abstract class CharactersResBase
     /// <summary>
     /// 立绘
     /// </summary>
-    public TextureRect Illustration { get; set; }
+    public Texture2D Illustration { get; set; }
 
 
     public Rect2 GetAvatarRegion(int row, int column)

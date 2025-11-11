@@ -21,9 +21,9 @@ public class MainMenuRes: ResBase
         this.MenuItemsHover = [];
                
 
-        this.Background = this.LoadRes<Texture2D>("SYSTEM/TITLE.png");
+        this.Background = ResBase.LoadRes<Texture2D>("SYSTEM/TITLE.png");
 
-        var title_ob = this.LoadRes<Texture2D>("SYSTEM/TITLE_OB.png");
+        var title_ob = ResBase.LoadRes<Texture2D>("SYSTEM/TITLE_OB.png");
 
         var ract = 196 * this.Zoom / 14;
 

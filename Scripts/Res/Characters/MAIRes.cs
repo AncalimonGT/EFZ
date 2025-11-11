@@ -24,5 +24,7 @@ public class MAIRes : CharactersResBase
             Atlas = @object,
             Region = new Rect2(0, 256 + 32 *11, 122 * Zoom, 32 * Zoom)
         };
+
+        this.Illustration = ResBase.LoadRes<Texture2D>("SYSTEM/MAI/MAI.png");
     }
 }

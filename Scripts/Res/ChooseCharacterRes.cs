@@ -42,8 +42,8 @@ public class ChooseCharacterRes : ResBase
     {
         this.CharactersRes = [];
 
-        this.Background = this.LoadRes<Texture2D>("SYSTEM/chr_sel_bg.png");
-        this.Object = this.LoadRes<Texture2D>("SYSTEM/chr_sel_ob.png");
+        this.Background = ResBase.LoadRes<Texture2D>("SYSTEM/chr_sel_bg.png");
+        this.Object = ResBase.LoadRes<Texture2D>("SYSTEM/chr_sel_ob.png");
 
         foreach (var item in Helpers.GetType<CharactersResBase>())
         {
