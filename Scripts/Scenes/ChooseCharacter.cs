@@ -78,11 +78,11 @@ public partial class ChooseCharacter : NodeBase
             Size = new Vector2(size.X * this.Zoom, size.Y * this.Zoom),
             Position = new Vector2(0, 0)
         };
-
+        
         //初始化角色列表
         foreach (var subclass in Helpers.GetType<CharacterBase>())
         {
-            var instance = (CharacterBase)Activator.CreateInstance(subclass);
+            var instance = (CharacterBase)Activator.CreateInstance(subclass, [this.DataRes.ChooseCharacter.Object]);
             this.Characters.Add(instance);
         }
 
@@ -117,7 +117,7 @@ public partial class ChooseCharacter : NodeBase
             TextureFilter = CanvasItem.TextureFilterEnum.Nearest,
             Visible = false
         };
-         
+
         this.P1SelectBar = new TextureRect()
         {
             Texture = this.DataRes.ChooseCharacter.P1SelectBar,
@@ -158,7 +158,7 @@ public partial class ChooseCharacter : NodeBase
         //显示角色
         foreach (var character in this.Characters)
         {
-            var res = character.Res.Avatar;
+            var res = character.Avatar;
             var width = res.GetSize().X * this.Zoom;
             var height = res.GetSize().Y * this.Zoom;
 
@@ -185,16 +185,16 @@ public partial class ChooseCharacter : NodeBase
                     this.P1SelectBox.Visible = true;
 
                     this.P1NameBoard.Visible = true;
-                    this.P1Name.Texture = character.Res.NameBoard;
+                    this.P1Name.Texture = character.NameBoard;
                     this.P1Name.Visible = true;
 
-                    var ill = character.Res.Illustration;
+                    var ill = character.Illustration;
                     if (ill != null)
                     {
-                        var size = character.Res.Illustration.GetSize();
+                        var size = character.Illustration.GetSize();
                         this.Log().Info($"角色立绘{size}");
 
-                        this.P1Illustration.Texture = character.Res.Illustration;
+                        this.P1Illustration.Texture = character.Illustration;
                         this.P1Illustration.FlipH = true;
                         this.P1Illustration.Position = new Vector2(-Convert.ToInt32(this.AppDataCore.WindowsSize.X / 3.7), 0);
                         this.P1Illustration.Size = new Vector2(size.X * this.Zoom, size.Y * this.Zoom);
@@ -266,8 +266,6 @@ public partial class ChooseCharacter : NodeBase
 
     public override void _Input(InputEvent @event)
     {
-
-
         if (@event.IsActionPressed("ui_right"))
         {
             this.Selected(1, 0);
@@ -284,6 +282,9 @@ public partial class ChooseCharacter : NodeBase
         {
             this.Selected(0, 1);
         }
-
+        else if (@event.IsActionPressed("ui_accept"))
+        {
+            this.GetTree().ChangeSceneToFile("res://Scenes/ChooseArea.tscn");
+        }
     }
 }

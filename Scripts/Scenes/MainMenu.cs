@@ -6,8 +6,6 @@ namespace EFZ.Scripts;
 
 public partial class MainMenu : NodeBase
 {
- 
-
     public List<TextureButton> Buttons { get; set; }
 
     public MainMenu()

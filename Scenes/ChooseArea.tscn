@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp7efw0obqwo7"]
+
+[ext_resource type="Script" uid="uid://c4j6pcwhxmb77" path="res://Scripts/Scenes/ChooseArea.cs" id="1_lidec"]
+
+[node name="ChooseScene" type="Node2D"]
+script = ExtResource("1_lidec")

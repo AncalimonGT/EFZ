@@ -1,11 +1,7 @@
-using EFZ.Scripts.Res.Characters;
+using EFZ.Scripts.Characters;
 using Godot;
-using Splat;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EFZ.Scripts.Res;
 
@@ -21,10 +17,7 @@ public class ChooseCharacterRes : ResBase
     /// </summary>
     public Texture2D Object { get; set; }
 
-    /// <summary>
-    /// 角色资源
-    /// </summary>
-    public List<CharactersResBase> CharactersRes { get; set; }
+  
 
     /// <summary>
     /// P1选择框
@@ -37,23 +30,15 @@ public class ChooseCharacterRes : ResBase
     /// </summary>
     public AtlasTexture P1NameBoard { get; set; }
 
-  
-   public AtlasTexture P1SelectBar { get; set; }
+
+    public AtlasTexture P1SelectBar { get; set; }
 
     public override void Load()
-    {
-        this.CharactersRes = [];
 
+    { 
         this.Background = ResBase.LoadRes<Texture2D>("SYSTEM/chr_sel_bg.png");
         this.Object = ResBase.LoadRes<Texture2D>("SYSTEM/chr_sel_ob.png");
 
-        foreach (var item in Helpers.GetType<CharactersResBase>())
-        {
-            var @obj = (CharactersResBase)Activator.CreateInstance(item, [this.Object]);
-
-            this.CharactersRes.Add(@obj);
-
-        }
 
         this.P1SelectBox = new AtlasTexture()
         {
